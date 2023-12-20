@@ -61,22 +61,22 @@ const assignGrade = average => {
 };
 
 const displayStudentList = () => {
-    let studentListHTML = "<ul>";
+    let studentListText = "";
 
-     for (const student of studentList) {
-
+    for (const student of studentList) {
         const average = (student.test1 + student.test2 + student.test3) / 3;
         const grade = assignGrade(average);
 
-        let message = 'Imie i Nazwisko: ' + student.name + '<br>';
-        message += 'Numer albumu: ' + student.id + '<br>';
-        message += 'Średnia ocen: ' + average.toFixed(2) + ", Ocena końcowa: " + grade;
-
-        studentListHTML += "<li>" + message + "</li>";
+        let message = 
+        `   Imię i Nazwisko: ${student.name}
+            Numer albumu: ${student.id}
+            Średnia ocen: ${average.toFixed(2)}, Ocena końcowa: ${grade}
+        `;
+        studentListText += message;
     }
 
-    studentListHTML += "</ul>";
-    output.innerHTML = studentListHTML; 
+    const output = document.getElementById("display");
+    output.innerText = studentListText;
 };
 
 const exportToCSV = () => {
