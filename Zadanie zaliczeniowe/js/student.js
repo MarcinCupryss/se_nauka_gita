@@ -119,7 +119,8 @@ const importFromCSV = () => {
 
             for (let i = 1; i < rows.length; i++) {
                 const [name, id, test1, test2, test3] = rows[i].split(',');
-                if (name && id && test1 && test2 && test3) {
+                if (name && id && test1 !== undefined && test2 !== undefined && test3 !== undefined &&
+                    !isNaN(parseFloat(test1)) && !isNaN(parseFloat(test2)) && !isNaN(parseFloat(test3))) {
                     const student = {
                         name,
                         id,
@@ -128,6 +129,8 @@ const importFromCSV = () => {
                         test3: parseFloat(test3),
                     };
                     studentList.push(student);
+                } else {
+                    console.log('Invalid data in the CSV file. Skipping the row: ' + rows[i]);
                 }
             }
 
