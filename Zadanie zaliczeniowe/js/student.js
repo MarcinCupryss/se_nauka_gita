@@ -81,7 +81,7 @@ const displayStudentList = () => {
 
 const exportToCSV = () => {
     const csvContent = "data:text/csv;charset=utf-8," +
-        "Imie i Nazwisko,Numer albumu,Test 1,Test 2,Test 3\n";
+        "Imie i Nazwisko,Numer albumu,Test 1,Test 2,Test 3";
 
     const dataRows = studentList.map(student => {
         return `${student.name},${student.id},${student.test1},${student.test2},${student.test3}`;
@@ -105,6 +105,12 @@ const importFromCSV = () => {
     fileInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (!file) return;
+
+        const fileName = file.name.toLowerCase();
+        if (!fileName.endsWith('.csv')) {
+            alert('Invalid file format. Please select a CSV file.');
+            return;
+        }
 
         const reader = new FileReader();
         reader.onload = function (e) {
